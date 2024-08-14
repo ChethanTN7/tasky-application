@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Tasky Application</title>
 
   <!-- styles -->
   <link rel="stylesheet" href="./index.css">
@@ -16,6 +16,80 @@
 </head>
 
 <body>
+
+  <!-- button for small screen size -->
+  <div class="add__new__btn__mobile__only">
+    <button class="btn btn-outline-primary" type="submit" data-bs-toggle="modal" data-bs-target="#addNewItem">
+      <i class="fa-solid fa-plus"></i> Add New Item
+    </button>
+  </div>
+
+  <!-- Add New Modal -->
+  <div class="modal fade" id="addNewItem" tabindex="-1" aria-labelledby="addNewItemLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addNewItemLabel">Add New Item</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <!-- img -->
+            <div class="mb-3">
+              <label for="imageUrl" class="form-label">Image URL</label>
+              <input type="url" class="form-control" id="imageUrl" aria-describedby="imageDesc"
+                placeholder="Enter image URL">
+              <div id="imageDesc" class="form-text">It's an optional field for you.</div>
+            </div>
+
+            <!-- task title -->
+            <div class="mb-3">
+              <label for="taskTitle" class="form-label">Task Title</label>
+              <input type="text" class="form-control" id="taskTitle" placeholder="Task title" required>
+            </div>
+
+            <!-- task type -->
+            <div class="mb-3">
+              <label for="tags" class="form-label">Task Type</label>
+              <input type="text" class="form-control" id="tags" placeholder="Task type" required>
+            </div>
+
+            <!-- Task description -->
+            <div class="mb-3">
+              <label for="taskDescription" class="form-label">Task Type</label>
+              <textarea type="text" class="form-control" id="taskDescription" placeholder="Task description"
+                rows="3"></textarea>
+            </div>
+
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Open Task Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Task Details</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body task__modal__body">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
 
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
@@ -30,7 +104,7 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
         </ul>
-        <button class="btn btn-outline-primary" type="submit">
+        <button class="btn btn-outline-primary" type="submit" data-bs-toggle="modal" data-bs-target="#addNewItem">
           <i class="fa-solid fa-plus"></i> Add New Item
         </button>
       </div>
@@ -56,9 +130,10 @@
     </section>
 
     <!-- card section -->
-     <section>
-
-     </section>
+    <section class="mt-5">
+      <div class="row task__contents">
+      </div>
+    </section>
   </div>
 
   <!-- scripts -->
