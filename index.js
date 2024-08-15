@@ -9,11 +9,7 @@ const taskModal = document.querySelector(".task__modal__body");
 // console.log(taskModal);
 
 // template for the cards on the screen
-const htmlTaskContents = ({ url, title, type, description,  id}) => {
-    console.log(id);
-    console.log(title);
-    console.log(description);
-    console.log(url);
+const htmlTaskContents = ({ url, title, type, description, id }) => {
     return `
     <div class="col-md-6 col-lg-4 mt-3" id=${id}>
         <div class="card shadow-sm task__card">
@@ -21,13 +17,16 @@ const htmlTaskContents = ({ url, title, type, description,  id}) => {
                 <button type="button" class="btn btn-outline-primary mr-2" name=${id}>
                     <i class="fas fa-pencil-alt" name=${id}></i>
                 </button>
-                <button type="button" class="btn btn-outline-danger mr-2" name=${id}>
+                <button type="button" class="btn btn-outline-danger mr-2" name=${id} onclick="deleteTask()">
                     <i class="fas fa-trash-alt" name=${id}></i>
                 </button>
             </div>
 
            <div class="card-body">
-                ${url && `<img width="100%" src=${url} alt="card image" class="card-img-top md-3 rounded-lg"`}
+                ${url
+            ? `<img width="100%" src=${url} alt="card image" class="card-img-top md-3 rounded-lg"`
+            : `<img width="100%" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAIwA3wMBIgACEQEDEQH/xAAaAAEBAAMBAQAAAAAAAAAAAAAABQQGBwED/8QAPBABAAECAwQGBQkJAQAAAAAAAAECBAMFEQYWUZMSITFBVWETFVRkshQiMjQ1cnN00SNCYoGCocHh8Af/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A7EAAAAAAAAAAAAAAAAAAAAAAAAAASEgAAAAAAAAAAAAAAAAAAAAAAAAAAEhIAAAAAAAAAMa8vrWxoorvLjCwaap0ia6tOsGSJe8WS+J23Mh5vHkviVtzIBVErePJfErbmQbx5L4lbcyAVRK3jyXxK25kG8eS+JW3MgFUSt48l8StuZD3eLJfE7bmQCoPja3ODd4MY1tiU4mFMzpXT2To+wAAAAAABISAAAAAAAAAgbUUU4l5ktFdNNVNV5ETExrE/NX0HaX6/kf52PhkFT1dY+x2/Kg9XWPsdvyoZQDF9XWPsdvyoPV1j7Hb8qGV1/8Af4AYvq6y1iIs7flQerrHsmzt/wCeHT+jWf8A0LObvL8O3tbOucL00VV14kds6d0J2wWe3+PmfyG5xq8bCromqJqnWaZjzBu/q6x9jt+VBOXWOn1O35UMp5PYCFsVERkVEREREY2J1R95eQti/sOn8bF+KV0AAAAAAAkJAAAAAAAAAQdpfr+R/nY+GV5B2l+v5H+dj4ZBeYGdZta5PZTc3U+VFEdtc+RnWbW2T2U3N1Vp3U0R21z5OSZ3m9znF7NxdVfdojrimOEAtWW2t/h5xVdXHz7euYivAp7KKe7TzdIsbvAv7Wi5tcSnEwq46qo7v9uHLezO0GNklzOnSxLSqr9ph6/3jzB03OcntM6t6cC8on5s6010dtL45Fs7YZJNVdrFdeLXGk14kxrpwhQsrvAv7ai5tcSMTCqjWmY7vKWm7abV+iivLsrxI6fZi41M/R/hp8/MG5W13b3XpIt8anE9HVNOJ0Z16NT7T2OL5Lm9zk978pta+36dMz1Vx5/q6zk+bW2cWcXFpOsRGldP71M+YMLYv7Dp/GxfildQti/sKn8XF+KV0AAAAAAAkJAAAAAAAAAaxttd02E5Xd4lPSowrnp6RPX9GWztd21ye6zmywMK09FFWHi9Krp1ad2gOb51m1znF7Nxc1fdop7KY4MBtG4mc+7c03Ezn3bmg1c1bRuJnPu3NNxM5925oI1hnF9l9vj4Fpj1UYeNT0ao4eccGB3697Z9xM542/Ne7iZz7tzQauoZLm1zk93GPbV9saVUVdlVPBY3Ezn3bmvNxM5925oNz2HrjE2dwcTsivFxJ0/qlfSdlsuxsrybBtLroxi0VVT83rjrnVWAAAAAAAJCQAAAAAAAAHj0A1niazxADWeJrPEANZ4ms8QA1niazxADh5AAAAAAAAEhIAAAAAAAAAAAAAAAAAAAAAAAAAABISAAAAAAAAAAAAAAAAAAAAAAAAAAASEg/9k=" alt="card image" class="img-fluid place__holder__image mb-3" alt="card image" class="card-img-top md-3 rounded-lg"`
+        }
                 <h4 class="card-title task__card__title">${title}</h4>
                 <p class="description trim-3-lines text-muted">${description}</p>
                 <div class="tags text-white d-flex flex-wrap">
@@ -36,7 +35,7 @@ const htmlTaskContents = ({ url, title, type, description,  id}) => {
            </div>
 
            <div class="card-footer">
-                <button type="button" class="btn btn-outline-primary float-right" data-bs-toggle="modal" data-bs-target="#showTask">Open Task</button>
+                <button type="button" class="btn btn-outline-primary float-right" data-bs-toggle="modal" data-bs-target="#showTask" onclick="openTask()" id=${id}>Open Task</button>
            </div>
             
         </div>
@@ -49,8 +48,9 @@ const htmlModalContents = ({ id, title, description, url }) => {
     const date = new Date(parseInt(id));
     return `
         <div id=${id}>
-            ${url &&
-        `<img width="100%" src=${url} alt="card image" class="img-fluid place__holder__image mb-3"`
+        ${url
+            ? `<img width="100%" src=${url} alt="card image" class="card-img-top md-3 rounded-lg"`
+            : `<img width="100%" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAIwA3wMBIgACEQEDEQH/xAAaAAEBAAMBAQAAAAAAAAAAAAAABQQGBwED/8QAPBABAAECAwQGBQkJAQAAAAAAAAECBAMFEQYWUZMSITFBVWETFVRkshQiMjQ1cnN00SNCYoGCocHh8Af/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A7EAAAAAAAAAAAAAAAAAAAAAAAAAASEgAAAAAAAAAAAAAAAAAAAAAAAAAAEhIAAAAAAAAAMa8vrWxoorvLjCwaap0ia6tOsGSJe8WS+J23Mh5vHkviVtzIBVErePJfErbmQbx5L4lbcyAVRK3jyXxK25kG8eS+JW3MgFUSt48l8StuZD3eLJfE7bmQCoPja3ODd4MY1tiU4mFMzpXT2To+wAAAAAABISAAAAAAAAAgbUUU4l5ktFdNNVNV5ETExrE/NX0HaX6/kf52PhkFT1dY+x2/Kg9XWPsdvyoZQDF9XWPsdvyoPV1j7Hb8qGV1/8Af4AYvq6y1iIs7flQerrHsmzt/wCeHT+jWf8A0LObvL8O3tbOucL00VV14kds6d0J2wWe3+PmfyG5xq8bCromqJqnWaZjzBu/q6x9jt+VBOXWOn1O35UMp5PYCFsVERkVEREREY2J1R95eQti/sOn8bF+KV0AAAAAAAkJAAAAAAAAAQdpfr+R/nY+GV5B2l+v5H+dj4ZBeYGdZta5PZTc3U+VFEdtc+RnWbW2T2U3N1Vp3U0R21z5OSZ3m9znF7NxdVfdojrimOEAtWW2t/h5xVdXHz7euYivAp7KKe7TzdIsbvAv7Wi5tcSnEwq46qo7v9uHLezO0GNklzOnSxLSqr9ph6/3jzB03OcntM6t6cC8on5s6010dtL45Fs7YZJNVdrFdeLXGk14kxrpwhQsrvAv7ai5tcSMTCqjWmY7vKWm7abV+iivLsrxI6fZi41M/R/hp8/MG5W13b3XpIt8anE9HVNOJ0Z16NT7T2OL5Lm9zk978pta+36dMz1Vx5/q6zk+bW2cWcXFpOsRGldP71M+YMLYv7Dp/GxfildQti/sKn8XF+KV0AAAAAAAkJAAAAAAAAAaxttd02E5Xd4lPSowrnp6RPX9GWztd21ye6zmywMK09FFWHi9Krp1ad2gOb51m1znF7Nxc1fdop7KY4MBtG4mc+7c03Ezn3bmg1c1bRuJnPu3NNxM5925oI1hnF9l9vj4Fpj1UYeNT0ao4eccGB3697Z9xM542/Ne7iZz7tzQauoZLm1zk93GPbV9saVUVdlVPBY3Ezn3bmvNxM5925oNz2HrjE2dwcTsivFxJ0/qlfSdlsuxsrybBtLroxi0VVT83rjrnVWAAAAAAAJCQAAAAAAAAHj0A1niazxADWeJrPEANZ4ms8QA1niazxADh5AAAAAAAAEhIAAAAAAAAAAAAAAAAAAAAAAAAAABISAAAAAAAAAAAAAAAAAAAAAAAAAAASEg/9k=" alt="card image" class="img-fluid place__holder__image mb-3" alt="card image" class="card-img-top md-3 rounded-lg"`
         }
             <strong class="text-muted text-sm">Created On ${date.toDateString()}</strong>
             <h2 class="mb-3">${title}</h2>
@@ -73,8 +73,8 @@ const loadInitialData = () => {
 
     if (localStorageCopy) state.taskList = localStorageCopy.tasks;
 
-    state.taskList.map((cardData) => {
-        taskContents.insertAdjacentElement("beforeend", htmlTaskContents(cardData));
+    state.taskList.map((cardDate) => {
+        taskContents.insertAdjacentHTML("beforeend", htmlTaskContents(cardDate));
     });
 }
 
@@ -82,17 +82,40 @@ const handleSubmit = (event) => {
     const id = `${Date.now()}`;
     const input = {
         url: document.getElementById("imageUrl").value,
-        taskTitle: document.getElementById("taskTitle").value,
-        tags: document.getElementById("tags").value,
-        taskDescription: document.getElementById("taskDescription").value
+        title: document.getElementById("taskTitle").value,
+        type: document.getElementById("tags").value,
+        description: document.getElementById("taskDescription").value,
     }
 
-    console.log(input);
+    if (input.title === "" || input.type === "" || input.description === "")
+        return alert("Please enter the required fields");
 
     taskContents.insertAdjacentHTML("beforeend", htmlTaskContents({ ...input, id }));
-
     state.taskList.push({ ...input, id });
+    updateLocalStorage();
+}
+
+const openTask = (e) =>{
+    if(!e) e = window.event;
+
+    const getTask = state.taskList.find(({id}) => id === e.target.id);
+    taskModal.innerHTML = htmlModalContents(getTask);
+}
+
+const deleteTask = (e) =>{
+    if(!e) e = window.event;
+
+    const targetId = e.target.getAttribute("name");
+
+    const type = e.target.tagName;
+
+    state.taskList = state.taskList.filter(({id}) => id !== targetId);
+    console.log(state.taskList);
 
     updateLocalStorage();
 
+    if(type === "BUTTON"){
+        return e.target.parentNode.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode.parentNode);
+    }
+    return e.target.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode.parentNode.parentNode);
 }
