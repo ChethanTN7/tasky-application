@@ -5,16 +5,13 @@ const state = {
 const taskContents = document.querySelector(".task__contents");
 const taskModal = document.querySelector(".task__modal__body");
 
-// console.log(taskContent);
-// console.log(taskModal);
-
 // template for the cards on the screen
 const htmlTaskContents = ({ url, title, type, description, id }) => {
     return `
     <div class="col-md-6 col-lg-4 mt-3" id=${id}>
         <div class="card shadow-sm task__card">
             <div class="card-header d-flex justify-content-end task__card__header">
-                <button type="button" class="btn btn-outline-primary" name=${id} onclick="editTask()">
+                <button type="button" class="btn btn-outline-primary" style="margin-right:1rem" name=${id} onclick="editTask()">
                     <i class="fas fa-pencil-alt" name=${id}></i>
                 </button>
                 <button type="button" class="btn btn-outline-danger" name=${id} onclick="deleteTask()">
@@ -78,6 +75,13 @@ const loadInitialData = () => {
     });
 }
 
+const clearValues = () =>{
+    let clr = document.getElementsByClassName("clear");
+    for(i=0;i<clr.length;i++){
+        clr[i].value = "";
+    }
+}
+
 const handleSubmit = (event) => {
     const id = `${Date.now()}`;
     const input = {
@@ -93,7 +97,7 @@ const handleSubmit = (event) => {
     taskContents.insertAdjacentHTML("beforeend", htmlTaskContents({ ...input, id }));
     state.taskList.push({ ...input, id });
     updateLocalStorage();
-    // history.go(0);
+    clearValues();
 }
 
 const openTask = (e) => {
@@ -110,8 +114,6 @@ const deleteTask = (e) => {
     const type = e.target.tagName;
 
     state.taskList = state.taskList.filter(({ id }) => id !== targetId);
-    console.log(state.taskList);
-
     updateLocalStorage();
 
     if (type === "BUTTON") {
@@ -139,7 +141,6 @@ const editTask = (e) => {
         parentNode = e.target.parentNode.parentNode.parentNode;
     }
 
-    // console.log(parentNode);
     taskTitle = parentNode.childNodes[3].childNodes[3];
     taskDescription = parentNode.childNodes[3].childNodes[5];
     taskType = parentNode.childNodes[3].childNodes[7].childNodes[1];
@@ -164,10 +165,6 @@ const saveEdit = (e) => {
     const taskTitle = parentNode.childNodes[3].childNodes[3];
     const taskDescription = parentNode.childNodes[3].childNodes[5];
     const taskType = parentNode.childNodes[3].childNodes[7].childNodes[1];
-
-    console.log(taskTitle.innerText);
-    console.log(taskDescription.innerText);
-    console.log(taskType.innerText);
 
     const updateData = {
         taskTitle: taskTitle.innerText,
@@ -196,15 +193,17 @@ const saveEdit = (e) => {
     e.target.innerText = "Open Task";
 }
 
-const searchTask = (e) =>{
+const searchTask = (e) => {
     if (!e) e = window.event;
 
-    while(taskContents.firstChild){
+    while (taskContents.firstChild) {
         taskContents.removeChild(taskContents.firstChild);
     }
-    const resultData = state.taskList.filter(({title}) =>{
-        title.includes(e.target.value);
-    });
+    const resultData = state.taskList.filter(({ title }) =>
+        title.toLowerCase().includes(e.target.value.toLowerCase())
+    );
 
-    console.log(resultData);
+    resultData.map((cardData) => {
+        taskContents.insertAdjacentHTML("beforeend", htmlTaskContents(cardData))
+    });
 }

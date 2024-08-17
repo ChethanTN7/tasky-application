@@ -5,6 +5,7 @@
 
 body{
     background-color: #ebf2ff !important;
+    padding-bottom: 70px;
 }
 
 .add__new__btn__mobile__only{
@@ -17,7 +18,7 @@ body{
     z-index: 3;
 }
 
-@media(min-width: 768px){
+@media(min-width: 990px){
     .add__new__btn__mobile__only{
         display: none;
     }

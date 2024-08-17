@@ -37,7 +37,7 @@
             <!-- img -->
             <div class="mb-3">
               <label for="imageUrl" class="form-label">Image URL</label>
-              <input type="url" class="form-control" id="imageUrl" aria-describedby="imageDesc"
+              <input type="url" class="form-control clear" id="imageUrl" aria-describedby="imageDesc"
                 placeholder="Enter image URL">
               <div id="imageDesc" class="form-text">It's an optional field for you.</div>
             </div>
@@ -45,19 +45,19 @@
             <!-- task title -->
             <div class="mb-3">
               <label for="taskTitle" class="form-label">Task Title</label>
-              <input type="text" class="form-control" id="taskTitle" placeholder="Task title" required>
+              <input type="text" class="form-control clear" id="taskTitle" placeholder="Task title" required>
             </div>
 
             <!-- task type -->
             <div class="mb-3">
               <label for="tags" class="form-label">Task Type</label>
-              <input type="text" class="form-control" id="tags" placeholder="Task type" required>
+              <input type="text" class="form-control clear" id="tags" placeholder="Task type" required>
             </div>
 
             <!-- Task description -->
             <div class="mb-3">
               <label for="taskDescription" class="form-label">Task Type</label>
-              <textarea type="text" class="form-control" id="taskDescription" placeholder="Task description"
+              <textarea type="text" class="form-control clear" id="taskDescription" placeholder="Task description"
                 rows="3" required></textarea>
             </div>
 
@@ -66,7 +66,7 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" onclick="handleSubmit()">Save changes</button>
+          <button type="submit" class="btn btn-primary" onclick="handleSubmit()" data-bs-dismiss="modal">Save changes</button>
         </div>
       </div>
     </div>
@@ -117,15 +117,12 @@
         <div class="col-md-6">
           <div class="input-group flex-nowrap shadow-lg rounded">
             <input type="search" class="form-control" placeholder="Search your task here" aria-label="Search Task"
-              aria-describedby="addon-wrapping" onchange="searchTask()">
+              aria-describedby="addon-wrapping" oninput="searchTask()">
             <span class="input-group-text">
               <i class="fa-solid fa-search"></i>
             </span>
           </div>
         </div>
-        <!-- <div class="col-md-6">
-
-        </div> -->
       </div>
     </section>
 
