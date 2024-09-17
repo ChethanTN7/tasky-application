@@ -203,7 +203,12 @@ const searchTask = (e) => {
         title.toLowerCase().includes(e.target.value.toLowerCase())
     );
 
+    if (resultData.length == 0) {
+        if (e.target.value.toLowerCase() != "")
+          taskContents.innerHTML = `<h4 class="text-center mt-3" >No Tasks Found</h4>`;
+    }
+    
     resultData.map((cardData) => {
-        taskContents.insertAdjacentHTML("beforeend", htmlTaskContents(cardData))
+        taskContents.insertAdjacentHTML("beforeend", htmlTaskContents(cardData));
     });
 }
