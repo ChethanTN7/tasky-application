@@ -1,25 +1,26 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-body{
-    background-color: #ebf2ff !important;
-    padding-bottom: 70px;
+body {
+  background-image: url(https://wallpaperbat.com/img/305496-digital-marketing-wallpaper-png-7-png-image.png);
+  background-size: cover;
+  padding-bottom: 70px;
 }
 
-.add__new__btn__mobile__only{
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    padding: 15px 12px;
-    background-color: white;
-    width: 100%;
-    z-index: 3;
+.add__new__btn__mobile__only {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 15px 12px;
+  background-color: white;
+  width: 100%;
+  z-index: 3;
 }
 
-@media(min-width: 990px){
-    .add__new__btn__mobile__only{
-        display: none;
-    }
+@media (min-width: 990px) {
+  .add__new__btn__mobile__only {
+    display: none;
+  }
 }
